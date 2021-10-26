@@ -38,13 +38,13 @@ if __name__ == "__main__":
     try:
         host_ip_addrs = socket.gethostbyname(host)
     except socket.gaierror:
-        print('[ERROR] invalid host : %s\n' % host)
+        print('[ERROR] invalid host : %s' % host)
         exit()
     
     # Map TCP transport protocon name to protocol number
     protocol_number = socket.getprotobyname('tcp')
     if (protocol_number == 0):
-        print("[ERROR] cannot map 'tcp' to protocol number\n")
+        print("[ERROR] cannot map 'tcp' to protocol number")
         exit()
 
     # Create a socket
@@ -53,7 +53,7 @@ if __name__ == "__main__":
         try:
             s.connect((host_ip_addrs, port))
         except TimeoutError:
-            print("[ERROR] connect failed\n")
+            print("[ERROR] connect failed")
             exit()
         
         # Repeatedly read data from socket and write to user's screen

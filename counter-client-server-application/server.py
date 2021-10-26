@@ -22,7 +22,7 @@ if __name__ == "__main__":
             port = int(argv[2])
             # test for legal value
             if (port < 0):
-                print('[ERROR] bad port number {}\n'.format(argv[2]))
+                print('[ERROR] bad port number {}'.format(argv[2]))
                 exit()
         except ValueError:
             port = PORT
@@ -32,7 +32,7 @@ if __name__ == "__main__":
     # Map TCP transport protocon name to protocol number
     protocol_number = socket.getprotobyname('tcp')
     if (protocol_number == 0):
-        print("[ERROR] cannot map 'tcp' to protocol number\n")
+        print("[ERROR] cannot map 'tcp' to protocol number")
         exit()
     
     # Create a socket
@@ -41,30 +41,30 @@ if __name__ == "__main__":
         try:
             s.bind((HOST,PORT))
         except socket.error as msg:
-            print('[ERROR] bind failed : %s\n' % str(msg))
+            print('[ERROR] bind failed : %s' % str(msg))
             exit()
 
-        print('[INFO] Server listening...\n')
+        print('[INFO] Server listening...')
         # Specify size of request queue
         try:
             s.listen(QLEN)
         except socket.error as msg:
-            print('[ERROR] listen failed : %s\n' % str(msg))
+            print('[ERROR] listen failed : %s' % str(msg))
             exit()
         
         # Main server loop - accept and handle requests
         while True:
             try:
                 conn, client_addr = s.accept()
-                print('[INFO] Connected by {}\n'.format(client_addr))
+                print('[INFO] Connected by {}'.format(client_addr))
             except socket.error as msg:
-                print('[ERROR] accept failed : %s\n' % str(msg))
+                print('[ERROR] accept failed : %s' % str(msg))
                 exit()
             
             visits += 1
             now = datetime.now()
             current_time = str(now.strftime("%H:%M:%S"))
-            buffer = "[SUCCESS - {}] This server has been contacted {} time.\n".format(current_time, visits)
+            buffer = "[SUCCESS - {}] This server has been contacted {} time.".format(current_time, visits)
             conn.sendall(str.encode(buffer))
             conn.close()
             
